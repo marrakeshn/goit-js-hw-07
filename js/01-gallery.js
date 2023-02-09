@@ -1,5 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
+let instance;
 const galleryContainerItem = document.querySelector(".gallery");
 const itemsMarkup = createItemsMarkup(galleryItems);
 galleryContainerItem.insertAdjacentHTML("beforeend",  itemsMarkup);
@@ -27,11 +28,18 @@ const onContainerClick = (e) => {
     if (e.target.classList.contains("gallery")) return;
         const source = e.target.dataset.source;
         
-    const instance = basicLightbox.create(`
+    instance = basicLightbox.create(`
         <img src="${source}"width="800" height="600">`);
         
     instance.show();
 };
+
+document.addEventListener("keydown", (e) => {
+  if (e.key == "Escape") {
+    instance.close();
+  }
+});
+
 
 
 
